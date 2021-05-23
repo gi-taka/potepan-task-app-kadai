@@ -1,2 +1,32 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<h3>スケジュール一覧</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>スケジュール更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.title %></td>
+      <td><%= task.start_at %></td>
+      <td><%= task.end_at %></td>
+      <td>
+        <% if task.all_day == true %>
+          ○
+        <% end %>
+      </td>
+      <td><%= task.updated_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to"スケジュール新規登録", new_task_path %>
