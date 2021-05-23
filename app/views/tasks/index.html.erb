@@ -16,14 +16,14 @@
     <tr>
       <td><%= task.id %></td>
       <td><%= task.title %></td>
-      <td><%= task.start_at %></td>
-      <td><%= task.end_at %></td>
+      <td><%= task.start_at.to_s(:default) %></td>
+      <td><%= task.end_at.to_s(:default) %></td>
       <td>
         <% if task.all_day == true %>
           ○
         <% end %>
       </td>
-      <td><%= task.updated_at %></td>
+      <td><%= task.updated_at.to_s(:datetime_jp) %></td>
     </tr>
     <% end %>
   </tbody>
