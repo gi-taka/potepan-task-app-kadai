@@ -7,6 +7,6 @@ class Task < ApplicationRecord
   private
 
   def start_end_check
-    errors.add(:end_at, "は開始日より前にはできません") if end_at == true && start_at == true && end_at < start_at
+    errors.add(:end_at, "は開始日より前にはできません") if end_at.to_i < start_at.to_i
   end
 end
