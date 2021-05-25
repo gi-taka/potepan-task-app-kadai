@@ -1,0 +1,32 @@
+<h3>タスク詳細</h3>
+<table>
+  <tbody>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @task.title %></td>
+    </tr>
+    <tr>
+      <th>開始日</th>
+      <td><%= @task.start_at.to_s(:default) %></td>
+    </tr>
+    <tr>
+      <th>投稿日時</th>
+      <td><%= @task.end_at.to_s(:default) %></td>
+    </tr>
+    <tr>
+      <th>終日</th>
+      <td>
+        <% if @task.all_day == true %>
+          ○
+        <% end %> 
+      </td>
+    </tr>
+    <tr>
+      <th>スケジュールメモ</th>
+      <td><%= @task.memo %></td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li><%= link_to "スケジュール一覧に戻る", tasks_path %></li>
+</ul>
