@@ -26,10 +26,10 @@ describe 'スケジュール管理機能', type: :system do
         check '終日'
         fill_in 'スケジュールメモ', with: 'テストテスト'
         click_on 'スケジュールを新規登録する'
-        visit tasks_path
       end
       it '追加したスケジュールが表示される' do
         expect(page).to have_content 'テスト'
+        expect(page).to have_content 'スケジュールを登録しました'
       end
     end
 
@@ -42,6 +42,7 @@ describe 'スケジュール管理機能', type: :system do
         expect(page).to have_content 'タイトルを入力してください'
         expect(page).to have_content '開始日を入力してください'
         expect(page).to have_content '終了日を入力してください'
+        expect(page).to have_content 'スケジュールを登録できませんでした'
       end
     end
 
@@ -57,6 +58,7 @@ describe 'スケジュール管理機能', type: :system do
       end
       it '終了日を開始日より後にするよう指示される' do
         expect(page).to have_content '終了日は開始日より前にはできません'
+        expect(page).to have_content 'スケジュールを登録できませんでした'
       end
     end
   end
@@ -75,10 +77,10 @@ describe 'スケジュール管理機能', type: :system do
         check '終日'
         fill_in 'スケジュールメモ', with: 'テストテスト'
         click_on 'スケジュールの編集を完了する'
-        visit tasks_path
       end
       it '更新したスケジュールが表示される' do
         expect(page).to have_content 'テスト'
+        expect(page).to have_content 'スケジュールを更新しました'
       end
     end
 
@@ -86,14 +88,15 @@ describe 'スケジュール管理機能', type: :system do
       before do
         click_on '編集'
         fill_in 'タイトル', with: ''
-        fill_in '開始日', with: Time.parse('')
-        fill_in '終了日', with: Time.parse('')
+        fill_in '開始日', with: ''
+        fill_in '終了日', with: ''
         click_on 'スケジュールの編集を完了する'
       end
       it '必須項目を入力するよう指示される' do
         expect(page).to have_content 'タイトルを入力してください'
         expect(page).to have_content '開始日を入力してください'
         expect(page).to have_content '終了日を入力してください'
+        expect(page).to have_content 'スケジュールを更新できませんでした'
       end
     end
 
@@ -106,6 +109,24 @@ describe 'スケジュール管理機能', type: :system do
       end
       it '終了日を開始日より後にするよう指示される' do
         expect(page).to have_content '終了日は開始日より前にはできません'
+        expect(page).to have_content 'スケジュールを更新できませんでした'
+      end
+    end
+  end
+
+  describe 'スケジュール削除機能' do
+    before do
+      task_a = FactoryBot.create(:task)
+      visit tasks_path
+    end
+    context 'スケジュール削除機能で' do
+      before do
+        click_on '削除'
+        page.driver.browser.switch_to.alert.accept
+      end
+      it 'スケジュールが削除される' do
+        expect(page).not_to have_content 'テスト'
+        expect(page).to have_content 'スケジュールを削除しました'
       end
     end
   end
