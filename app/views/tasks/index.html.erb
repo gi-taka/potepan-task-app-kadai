@@ -1,0 +1,102 @@
+<h3>スケジュール一覧</h3>
+
+<%= render "shared/success" %>
+
+<%= render "shared/danger" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "id", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "id", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>タイトル
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "title", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "title", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>開始日
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "start_at", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "start_at", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>終了日
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "end_at", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "end_at", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>終日
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "all_day", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "all_day", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>スケジュール更新日時
+        <% if params[:sort] != "DESC" %>
+          <%= link_to tasks_path(key: "updated_at", sort: "DESC") do %>
+            <i class="fas fa-angle-down"></i>
+          <% end %>
+        <% else %>
+          <%= link_to tasks_path(key: "updated_at", sort: "ASC") do %>
+            <i class="fas fa-angle-up"></i>
+          <% end %>
+        <% end %>
+      </th>
+      <th>確認</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.title %></td>
+      <td><%= task.start_at.to_s(:default) %></td>
+      <td><%= task.end_at.to_s(:default) %></td>
+      <td>
+        <% if task.all_day == true %>
+          ○
+        <% end %>
+      </td>
+      <td><%= task.updated_at.to_s(:datetime_jp) %></td>
+      <td><%= link_to"参照", task %></td>
+      <td><%= link_to"編集", edit_task_path(task.id) %></td>
+      <td><%= link_to"削除", task_path(task.id), method: :delete,data: {confirm: "本当に削除しますか？"} %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to"スケジュール新規登録", new_task_path %>

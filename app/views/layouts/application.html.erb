@@ -8,9 +8,23 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Ruby on Rails スケジュール管理アプリ</h1>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <h1>現在の日時：<%= Time.now.to_s(:default) %>
+        <% if current_page?(tasks_path) %>
+          スケジュール合計：
+          <%= Task.count %>
+        <% end %>
+        </h1>
+    </footer>
   </body>
 </html>
