@@ -29,4 +29,6 @@
 </table>
 <ul>
   <li><%= link_to "スケジュール一覧に戻る", tasks_path %></li>
+  <li><%= link_to "スケジュールを編集する", edit_task_path(@task.id) %></li>
+  <li><%= link_to "スケジュールを削除", task_path(@task.id), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
 </ul>
