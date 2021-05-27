@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    if params[:key] && params[:sort]
+      @tasks = Task.all.order("#{params[:key]} #{params[:sort]}")
+    else
+      @tasks = Task.all
+    end
   end
 
   def show
@@ -43,4 +47,5 @@ class TasksController < ApplicationController
     flash[:alert] = "スケジュールを削除しました"
     redirect_to tasks_path
   end
+
 end
