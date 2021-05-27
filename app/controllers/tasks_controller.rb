@@ -8,9 +8,18 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
   end
 
   def update
+    @task = Task.find(params[:id])
+    if @task.update(params.require(:task).permit(:title, :start_at, :end_at, :all_day, :memo))
+      flash[:notice] = "スケジュールを更新しました"
+      redirect_to :tasks
+    else
+      flash[:alert] = "スケジュールを登録できませんでした"
+      render "edit"
+    end
   end
 
   def new

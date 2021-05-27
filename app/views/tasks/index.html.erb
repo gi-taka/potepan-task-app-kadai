@@ -10,6 +10,7 @@
       <th>終日</th>
       <th>スケジュール更新日時</th>
       <th>確認</th>
+      <th>編集</th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +27,7 @@
       </td>
       <td><%= task.updated_at.to_s(:datetime_jp) %></td>
       <td><%= link_to"参照", task %></td>
+      <td><%= link_to"編集", edit_task_path(task.id) %></td>
     </tr>
     <% end %>
   </tbody>
