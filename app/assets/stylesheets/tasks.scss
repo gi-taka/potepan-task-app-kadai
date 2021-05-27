@@ -1,3 +1,21 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.alert {
+  padding: 15px;
+  margin: 15px 0;
+  width:400px;
+  text-align: center;
+}
+
+.alert_success {
+  background-color: #98ECAA7A;
+  border: 2px solid #5CD075;
+}
+
+.alert_danger {
+  background-color: #EC98AC8F;
+  border: 2px solid #EC7592;
+}
