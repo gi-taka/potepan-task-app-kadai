@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       flash[:notice] = "スケジュールを更新しました"
       redirect_to :tasks
     else
-      flash[:alert] = "スケジュールを登録できませんでした"
+      flash[:alert] = "スケジュールを更新できませんでした"
       render "edit"
     end
   end
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params.require(:task).permit(:title, :start_at, :end_at, :all_day, :memo))
     if @task.save
-      flash[:notice] = "スケジュールを登録しました。"
+      flash[:notice] = "スケジュールを登録しました"
       redirect_to :tasks
     else
       flash[:alert] = "スケジュールを登録できませんでした"
